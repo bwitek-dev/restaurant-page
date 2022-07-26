@@ -9,14 +9,24 @@ $font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, A
 $special-font: 'Italianno', $font-stack;
 
 $paragraph-font-size: calc(0.5rem + 1vmin);
-$header-font-size: calc(1rem + 2.5vmin);
+$h1-font-size: calc(1rem + 2.5vmin);
+$h2-font-size: calc(0.75rem + 2vmin);
 
 $inner-padding: calc(0.5rem + 1vmin);
 $inner-footer-padding: calc(0.25rem + 0.5vmin);
 
+%round-corners{
+    border-radius: 5px;
+}
+
 %max-content-size{
     height: 100vh;
     width: 100vw;
+}
+
+@mixin set-heading($heading-size: $paragraph-font-size) {
+    font-family: $special-font;
+    font-size: $h1-font-size;
 }
 
 @mixin set-background($background: $primary-color) {
@@ -40,13 +50,13 @@ a{
         text-decoration: underline;
     }
 }
-.img-wrapper{
-    // background-color: green;
-}
 img{
     height: 100%;
-    width: 100%;
+    max-width: 100%;
     object-fit: contain;
+}
+h2{
+    @include set-heading($heading-size: $h2-font-size);
 }
 #content{
     @extend %max-content-size;
@@ -67,14 +77,13 @@ img{
             flex: 1;
         }
         >h1{
-            font-family: $special-font;
-            font-size: $header-font-size;
+            @include set-heading($heading-size: $h1-font-size);
             &::after{
                 background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/320px-Flag_of_Italy.svg.png);
                 background-size: contain;
                 display: inline-block;
-                width: $header-font-size;
-                height: calc($header-font-size*0.66);
+                width: $h1-font-size;
+                height: calc($h1-font-size*0.66);
                 content:"";
             }
         }
@@ -108,26 +117,34 @@ img{
 }
 #selected-content{
     @include set-background();
+    @extend %round-corners;
     grid-area: selected-content;
-    border-radius: 5px;
+
     padding: $inner-padding;
 
     display: flex;
+    justify-content: center;
+    align-items: center;
     >#about-tab{
-        // background-color: red;
-
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
         column-gap: $inner-padding;
         >.img-wrapper{
-            flex: 1.2 1;
-        }
-        >p{
-            flex: 1 1.2;
+            flex: 1;
+            align-self: center;
 
+            @media(max-width:600px){
+                flex: 100%;
+            }
+            img{
+                @extend %round-corners;
+            }
+
+
+        }
+        >#about-description{
+            flex: 1;
             text-align: justify;
-            // padding: 0 $inner-padding;
         }
     }
 
