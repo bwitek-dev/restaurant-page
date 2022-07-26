@@ -1,0 +1,134 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+
+
+$main-background: url(./images/main-background.jpg);
+$primary-color: rgba(255, 255, 255, 0.95);
+
+$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$special-font: 'Italianno', $font-stack;
+
+$paragraph-font-size: calc(0.5rem + 1vmin);
+$header-font-size: calc(1rem + 2.5vmin);
+
+$inner-padding: calc(0.5rem + 1vmin);
+$inner-footer-padding: calc(0.25rem + 0.5vmin);
+
+%max-content-size{
+    height: 100vh;
+    width: 100vw;
+}
+
+@mixin set-background($background: $primary-color) {
+    background: $background;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+body{
+    @extend %max-content-size;
+    font-family: $font-stack;
+    font-size: $paragraph-font-size;
+}
+a{
+    &:any-link{
+        color: inherit;
+        text-decoration: none;
+    }
+    &:hover{
+        text-decoration: underline;
+    }
+}
+.img-wrapper{
+    // background-color: green;
+}
+img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+#content{
+    @extend %max-content-size;
+    @include set-background($background: $main-background);
+
+    display: flex;
+    flex-direction: column;
+
+    >header{
+        @include set-background();
+        padding: 0 $inner-padding;
+        box-shadow: 0 0px 10px 1px black;
+
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        >*{
+            flex: 1;
+        }
+        >h1{
+            font-family: $special-font;
+            font-size: $header-font-size;
+            &::after{
+                background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/320px-Flag_of_Italy.svg.png);
+                background-size: contain;
+                display: inline-block;
+                width: $header-font-size;
+                height: calc($header-font-size*0.66);
+                content:"";
+            }
+        }
+        >ul{
+            list-style: none;
+            
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            column-gap: 20px;
+        }
+        
+    }
+    >main{
+        flex: 5;
+
+        display: grid;
+        grid-template-columns: 1fr 4fr 1fr;
+        grid-template-rows: 1fr 20fr 1fr;
+        grid-template-areas:'. . .'
+                            '. selected-content .'
+                            '. . .';
+        justify-content: center;
+        align-content: center;
+    }
+    >footer{
+        @include set-background();
+        padding: $inner-footer-padding 0;
+        text-align: center;
+    }
+}
+#selected-content{
+    @include set-background();
+    grid-area: selected-content;
+    border-radius: 5px;
+    padding: $inner-padding;
+
+    display: flex;
+    >#about-tab{
+        // background-color: red;
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        column-gap: $inner-padding;
+        >.img-wrapper{
+            flex: 1.2 1;
+        }
+        >p{
+            flex: 1 1.2;
+
+            text-align: justify;
+            // padding: 0 $inner-padding;
+        }
+    }
+
+}
