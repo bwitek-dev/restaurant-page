@@ -102,7 +102,6 @@ h2{
 
         display: grid;
         grid-template-columns: 1fr 4fr 1fr;
-        grid-template-rows: 1fr 20fr 1fr;
         grid-template-areas:'. . .'
                             '. selected-content .'
                             '. . .';
@@ -121,10 +120,6 @@ h2{
     grid-area: selected-content;
 
     padding: $inner-padding;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
     >#about-tab{
         display: flex;
         flex-wrap: wrap;
@@ -132,15 +127,12 @@ h2{
         >.img-wrapper{
             flex: 1;
             align-self: center;
-
-            @media(max-width:600px){
-                flex: 100%;
-            }
             img{
                 @extend %round-corners;
             }
-
-
+            @media(max-width:600px){
+                flex: 100%;
+            }
         }
         >#about-description{
             flex: 1;
