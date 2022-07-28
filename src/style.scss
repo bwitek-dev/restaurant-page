@@ -14,11 +14,16 @@ $paragraph-font-size: calc(0.5rem + 1vmin);
 $h1-font-size: calc(1rem + 2.5vmin);
 $h2-font-size: calc(0.9rem + 2.3vmin);
 $h3-font-size: $h2-font-size;
+$h4-font-size: calc(0.75rem + 2vmin);
 
 $outer-gap: calc(0.5rem + 1vmin);
 $inner-gap: calc(0.5rem + 1vmin);
 $inner-footer-gap: calc(0.25rem + 0.5vmin);
 
+%cancel-margin-padding{
+    margin: 0;
+    padding: 0;
+}
 %round-corners{
     border-radius: 5px;
 }
@@ -162,10 +167,10 @@ h3{
         row-gap: 10px;
         >.menu-item{
             @include set-item-layout(1, 3);
+            @extend %round-corners;
             flex: 1;
 
             background-color: $secondary-color;
-            // padding-right: $inner-gap;
 
             .item-heading{
                 border-bottom: dashed 1px black;
@@ -176,6 +181,19 @@ h3{
                 >.item-price{
                     @include set-heading($heading-size: $h3-font-size);
                 }
+            }
+        }
+    }
+    >#contact-tab{
+        display: flex;
+        flex-direction: column;
+        .contact-item{
+            display: grid;
+            align-items: baseline;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 1fr;
+            h3{
+                @extend %cancel-margin-padding;
             }
         }
     }
