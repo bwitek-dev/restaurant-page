@@ -1,6 +1,6 @@
 import furnaceUrl from './images/furnace.jpg';
 
-function renderAboutTab(pageDescription){
+function renderAboutTab(){
     const img = document.createElement(`img`);
     img.setAttribute(`src`, furnaceUrl);
     img.setAttribute(`alt`, `pic of our furnace`);
