@@ -12,7 +12,7 @@ $special-font: 'Italianno', $font-stack;
 $max-characters: 75ch;
 $paragraph-font-size: calc(0.5rem + 1vmin);
 $h1-font-size: calc(1rem + 2.5vmin);
-$h2-font-size: calc(0.75rem + 2vmin);
+$h2-font-size: calc(0.9rem + 2.3vmin);
 $h3-font-size: $h2-font-size;
 
 $outer-gap: calc(0.5rem + 1vmin);
@@ -55,7 +55,7 @@ $inner-footer-gap: calc(0.25rem + 0.5vmin);
 
 @mixin set-heading($heading-size: $paragraph-font-size) {
     font-family: $special-font;
-    font-size: $h1-font-size;
+    font-size: $heading-size;
 }
 
 @mixin set-background($background: $primary-color) {
