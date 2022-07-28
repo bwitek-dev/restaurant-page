@@ -4,16 +4,20 @@
 
 $main-background: url(./images/main-background.jpg);
 $primary-color: rgba(255, 255, 255, 0.95);
+$secondary-color: rgba(227, 227, 227, 0.95);
 
 $font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 $special-font: 'Italianno', $font-stack;
 
+$max-characters: 75ch;
 $paragraph-font-size: calc(0.5rem + 1vmin);
 $h1-font-size: calc(1rem + 2.5vmin);
 $h2-font-size: calc(0.75rem + 2vmin);
+$h3-font-size: $h2-font-size;
 
-$inner-padding: calc(0.5rem + 1vmin);
-$inner-footer-padding: calc(0.25rem + 0.5vmin);
+$outer-gap: calc(0.5rem + 1vmin);
+$inner-gap: calc(0.5rem + 1vmin);
+$inner-footer-gap: calc(0.25rem + 0.5vmin);
 
 %round-corners{
     border-radius: 5px;
@@ -22,6 +26,31 @@ $inner-footer-padding: calc(0.25rem + 0.5vmin);
 %max-content-size{
     height: 100vh;
     width: 100vw;
+}
+
+@mixin set-item-layout($img-flex: 1, $info-flex: 1){
+    display: flex;
+    flex-wrap: wrap;
+    &>.img-wrapper{
+        flex: $img-flex;
+        align-self: center;
+
+        line-height: 0;
+        img{
+            @extend %round-corners;
+        }
+        @media(max-width:600px){
+            flex: 100%;
+        }
+    }
+    &>.item-info{
+        flex: $info-flex;
+        text-align: justify;
+        padding: 0 $inner-gap;
+        >p{
+            max-width: $max-characters;
+        }
+    }
 }
 
 @mixin set-heading($heading-size: $paragraph-font-size) {
@@ -51,12 +80,14 @@ a{
     }
 }
 img{
-    height: 100%;
-    max-width: 100%;
-    object-fit: contain;
+    height: auto;
+    width: 100%;
 }
 h2{
     @include set-heading($heading-size: $h2-font-size);
+}
+h3{
+    @include set-heading($heading-size: $h3-font-size);
 }
 #content{
     @extend %max-content-size;
@@ -67,7 +98,7 @@ h2{
 
     >header{
         @include set-background();
-        padding: 0 $inner-padding;
+        padding: 0 $inner-gap;
         box-shadow: 0 0px 10px 1px black;
 
         display: flex;
@@ -99,18 +130,19 @@ h2{
     }
     >main{
         flex: 5;
+        min-height: 0;
+        overflow-y: auto;
+        margin: $outer-gap 0;
 
         display: grid;
         grid-template-columns: 1fr 4fr 1fr;
         grid-template-areas:'. . .'
                             '. selected-content .'
                             '. . .';
-        justify-content: center;
-        align-content: center;
     }
     >footer{
         @include set-background();
-        padding: $inner-footer-padding 0;
+        padding: $inner-footer-gap 0;
         text-align: center;
     }
 }
@@ -119,25 +151,34 @@ h2{
     @extend %round-corners;
     grid-area: selected-content;
 
-    padding: $inner-padding;
+    padding: $inner-gap;
+    margin: auto;
     >#about-tab{
+        @include set-item-layout($img-flex: 1, $info-flex: 3);
+    }
+    >#menu-tab{
         display: flex;
-        flex-wrap: wrap;
-        column-gap: $inner-padding;
-        >.img-wrapper{
+        flex-direction: column;
+        row-gap: 10px;
+        >.menu-item{
+            @include set-item-layout(1, 3);
             flex: 1;
-            align-self: center;
-            img{
-                @extend %round-corners;
+
+            background-color: $secondary-color;
+            // padding-right: $inner-gap;
+
+            .item-heading{
+                border-bottom: dashed 1px black;
+
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                >.item-price{
+                    @include set-heading($heading-size: $h3-font-size);
+                }
             }
-            @media(max-width:600px){
-                flex: 100%;
-            }
-        }
-        >#about-description{
-            flex: 1;
-            text-align: justify;
         }
     }
 
 }
+

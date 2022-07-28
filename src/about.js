@@ -23,7 +23,7 @@ function renderAboutTab(pageDescription){
     tootsie roll toffee cake. Lollipop ice cream marshmallow brownie gummi bears soufflé oat cake jelly. Jelly-o danish
     dragée liquorice powder oat cake.`
     const description = document.createElement(`div`);
-    description.setAttribute(`id`,`about-description`);
+    description.classList.add(`item-info`);
 
     description.appendChild(h2)
     description.appendChild(p)
