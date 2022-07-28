@@ -22,7 +22,7 @@ function createHeader(title, tabNames){
 
         let a = document.createElement(`a`);
         a.setAttribute(`href`,`#`);
-        a.setAttribute(`id`,`${tabName}Link`);
+        a.setAttribute(`id`,`${tabName}-link`);
         a.textContent = `${formatTabName(tabName)}`;
         
         li.appendChild(a);

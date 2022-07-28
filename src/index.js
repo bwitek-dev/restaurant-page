@@ -18,14 +18,12 @@ function switchTab(renderFunction){
 initLayout();
 renderAboutTab();
 
-const aboutTab = document.querySelector(`#about-usLink`);
+const aboutTab = document.querySelector(`#about-us-link`);
 aboutTab.addEventListener(`click`, switchTab.bind(aboutTab, renderAboutTab));
 
-const menuTab = document.querySelector(`#menuLink`);
+const menuTab = document.querySelector(`#menu-link`);
 menuTab.addEventListener(`click`, switchTab.bind(menuTab, renderMenuTab));
 
-const contactTab = document.querySelector(`#contactLink`);
+const contactTab = document.querySelector(`#contact-link`);
 contactTab.addEventListener(`click`, switchTab.bind(contactTab, renderContactTab));
-// renderAboutTab();
-// renderMenuTab();
-// renderContactTab();
+
